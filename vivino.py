@@ -14,13 +14,19 @@ time.sleep(3)
 
 winery = driver.find_elements_by_css_selector('span.vintageTitle__winery--2YoIr')
 winename = driver.find_elements_by_css_selector('span.vintageTitle__wine--U7t9G')
-country = driver.find_elements_by_css_selector('a.anchor__anchor--2QZvA vintageLocation__anchor--T7J3k')
-#region = driver.find_elements_by_css_selector('a.anchor__anchor--2QZvAvintageLocation__anchor--T7J3k[2]')
+country = driver.find_elements_by_css_selector('div.vintageLocation__vintageLocation--1DF0p')   #.text.split('\n')[0]
+region = driver.find_elements_by_css_selector('div.vintageLocation__vintageLocation--1DF0p')    #.text.split('\n')[2]
 rating = driver.find_elements_by_css_selector('div.vivinoRatingWide__averageValue--1zL_5')
 numberOfRatings = driver.find_elements_by_css_selector('div.vivinoRatingWide__basedOn--s6y0t')
 
-for i in numberOfRatings:
-    textname = i.text
+for i in winery:
+    if i == country:
+        textname = i.text.split('\n')[0]
+    elif i == region:
+        textname = i.text.split('\n')[2]
+    else:
+        textname = i.text
     print(textname)
+
 
 driver.quit()
